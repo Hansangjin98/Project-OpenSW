@@ -1,9 +1,11 @@
 import random
-from tkinter import Frame, Label, CENTER
+from tkinter import *
+import tkinter.font
 
 import logic
 import constants as c
 
+### 메인 class ###
 
 class GameGrid(Frame):
     def __init__(self):
@@ -102,5 +104,57 @@ class GameGrid(Frame):
             index = (self.gen(), self.gen())
         self.matrix[index[0]][index[1]] = 2
 
+### 메인 함수 ####
 
-gamegrid = GameGrid()
+# 선택된 게임의 크기에 따라 text 출력
+def set_grid_len4():
+    c.GRID_LEN = 4
+    label = Label(root, text="4x4가 선택되었습니다.", font=('Helvetica', 12, "bold"), background = "#eee4da")
+    label.place(x=210, y=180)
+
+def set_grid_len5():
+    c.GRID_LEN = 5
+    label = Label(root, text="5x5가 선택되었습니다.", font=('Helvetica', 12, "bold"), background = "#eee4da")
+    label.place(x=210, y=180)
+
+def set_grid_len6():
+    c.GRID_LEN = 6
+    label = Label(root, text="6x6이 선택되었습니다.", font=('Helvetica', 12, "bold"), background = "#eee4da")
+    label.place(x=210, y=180)
+
+# 게임 실행
+def start():
+    root.destroy()
+    gamegrid=GameGrid()
+
+# 게임 종료
+def close():
+    root.quit()
+
+
+# tk 객체 생성 및 frame 설정
+root = Tk()
+root.title("2048 Setting")
+root.geometry("560x400")
+root.configure(background = "#eee4da")
+root.resizable(False, False)
+
+
+# 레이블&버튼 생성
+label = Label(root, text="공개SW 프로젝트 9조", font=('Helvetica', 8, "bold"), background = "#eee4da")
+label.place(x=0, y=380)
+label = Label(root, text="게임 2048의 설정을 진행합니다." + "\n게임의 크기를 고른 후, 게임을 실행하세요.", font=('Helvetica', 18, "bold"), background = "#eee4da")
+label.pack(side="top")
+button1 = Button(root,text="4x4", font=('Helvetica', 18, "bold"), overrelief="solid", command=set_grid_len4, background = "#eee4da")
+button1.place(x=180, y=100)
+button2 = Button(root,text="5x5", font=('Helvetica', 18, "bold"), overrelief="solid", command=set_grid_len5, background = "#eee4da")
+button2.place(x=260, y=100)
+button3 = Button(root, text="6x6", font=('Helvetica', 18, "bold"), overrelief="solid", command=set_grid_len6, background = "#eee4da")
+button3.place(x=340, y=100)
+button4 = Button(root,text="게임 실행", font=('Helvetica', 18, "bold"), overrelief="solid", command=start, background = "#eee4da")
+button4.place(x=230, y=220)
+button5 = Button(root,text="종료", font=('Helvetica', 18, "bold"), overrelief="solid", command=close, background = "#eee4da")
+button5.place(x=255, y=300)
+
+# 메인 화면 표시
+root.mainloop()
