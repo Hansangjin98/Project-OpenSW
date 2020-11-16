@@ -131,6 +131,16 @@ def start():
 def close():
     root.quit()
 
+#도움말 기능
+def help():
+    ad = Tk()
+    ad.title("2048 help")
+    ad.geometry("480x260")
+    ad.configure(background = "#eee4da")
+    label = Label(ad, text="\n◆조작방법◆\nW, A, S, D 를 눌러 상, 하, 좌, 우를 입력하며,\nB를 눌러 되돌리기 기능을 이용할 수 있습니다.\n\n ◆게임규칙◆\n같은 숫자의 타일이 만나게 되면 숫자가 2배로 커지게 되고,\n타일을 이동할 때 마다 새로운 타일이 생성됩니다.\n 최종적으로 2048의 숫자를 만드는 것이 목표입니다.\n\n◆패배조건◆\n타일이 움직일 수 없게 되면 패배합니다.", font=('Helvetica', 13, "bold"), background = "#eee4da")
+    label.pack(side="top")
+
+
 
 # tk 객체 생성 및 frame 설정
 root = Tk()
@@ -143,7 +153,7 @@ root.resizable(False, False)
 # 레이블&버튼 생성
 label = Label(root, text="공개SW 프로젝트 9조", font=('Helvetica', 8, "bold"), background = "#eee4da")
 label.place(x=0, y=380)
-label = Label(root, text="게임 2048의 설정을 진행합니다." + "\n게임의 크기를 고른 후, 게임을 실행하세요.", font=('Helvetica', 18, "bold"), background = "#eee4da")
+label = Label(root, text="\n게임 2048의 설정을 진행합니다." + "\n게임의 크기를 고른 후, 게임을 실행하세요.", font=('Helvetica', 18, "bold"), background = "#eee4da")
 label.pack(side="top")
 button1 = Button(root,text="4x4", font=('Helvetica', 18, "bold"), overrelief="solid", command=set_grid_len4, background = "#eee4da")
 button1.place(x=180, y=100)
@@ -153,8 +163,11 @@ button3 = Button(root, text="6x6", font=('Helvetica', 18, "bold"), overrelief="s
 button3.place(x=340, y=100)
 button4 = Button(root,text="게임 실행", font=('Helvetica', 18, "bold"), overrelief="solid", command=start, background = "#eee4da")
 button4.place(x=230, y=220)
+button6 = Button(root,text="도움말", font=('Helvetica', 18, "bold"), overrelief="solid", command=help, background = "#eee4da")
+button6.place(x=245, y=280)
 button5 = Button(root,text="종료", font=('Helvetica', 18, "bold"), overrelief="solid", command=close, background = "#eee4da")
-button5.place(x=255, y=300)
+button5.place(x=255, y=340)
+
 
 # 메인 화면 표시
 root.mainloop()
