@@ -20,9 +20,8 @@ import sound as s
 
 
 def new_game(n):
-    s.sound_unpause()
     matrix = []
-
+    s.startsound()
     for i in range(n):
         matrix.append([0] * n)
     return matrix
@@ -38,7 +37,6 @@ def new_game(n):
 
 
 def add_two(mat):
-    s.effectsound()
     a = random.randint(0, len(mat)-1)
     b = random.randint(0, len(mat)-1)
     while(mat[a][b] != 0):
@@ -162,6 +160,7 @@ def merge(mat):
             if mat[i][j] == mat[i][j+1] and mat[i][j] != 0:
                 mat[i][j] *= 2
                 mat[i][j+1] = 0
+                s.effectsound()
                 done = True
     return (mat, done)
 

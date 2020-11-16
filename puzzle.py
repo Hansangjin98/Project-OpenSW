@@ -129,7 +129,6 @@ def set_grid_len6():
 # 게임 실행
 def start():
     root.destroy()
-    s.sound_pause()
     gamegrid=GameGrid()
 
 # 게임 종료
@@ -166,13 +165,13 @@ button3 = Button(root, text="6x6", font=('Helvetica', 18, "bold"), overrelief="s
 button3.place(x=340, y=100)
 button4 = Button(root,text="게임 실행", font=('Helvetica', 18, "bold"), overrelief="solid", command=start, background = "#eee4da")
 button4.place(x=230, y=220)
-button6 = Button(root,text="도움말", font=('Helvetica', 18, "bold"), overrelief="solid", command=help, background = "#eee4da")
-button6.place(x=245, y=280)
-button5 = Button(root,text="종료", font=('Helvetica', 18, "bold"), overrelief="solid", command=close, background = "#eee4da")
-button5.place(x=255, y=340)
+button5 = Button(root,text="도움말", font=('Helvetica', 18, "bold"), overrelief="solid", command=help, background = "#eee4da")
+button5.place(x=245, y=280)
+button6 = Button(root,text="종료", font=('Helvetica', 18, "bold"), overrelief="solid", command=close, background = "#eee4da")
+button6.place(x=255, y=340)
 
 #배경 사운드 재생
-s.startsound()
+s.firstsound()
 
 # 메인 화면 표시
 root.mainloop()
