@@ -4,6 +4,7 @@ import tkinter.font
 
 import logic
 import constants as c
+import sound as s
 
 ### 메인 class ###
 
@@ -92,17 +93,20 @@ class GameGrid(Frame):
                         text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[1][2].configure(
                         text="Win!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    s.endsound()
                 if logic.game_state(self.matrix) == 'lose':
                     self.grid_cells[1][1].configure(
                         text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[1][2].configure(
                         text="Lose!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    s.endsound()
 
     def generate_next(self):
         index = (self.gen(), self.gen())
         while self.matrix[index[0]][index[1]] != 0:
             index = (self.gen(), self.gen())
         self.matrix[index[0]][index[1]] = 2
+
 
 ### 메인 함수 ####
 
@@ -125,6 +129,7 @@ def set_grid_len6():
 # 게임 실행
 def start():
     root.destroy()
+    s.sound_pause()
     gamegrid=GameGrid()
 
 # 게임 종료
@@ -139,8 +144,6 @@ def help():
     ad.configure(background = "#eee4da")
     label = Label(ad, text="\n◆조작방법◆\nW, A, S, D 를 눌러 상, 하, 좌, 우를 입력하며,\nB를 눌러 되돌리기 기능을 이용할 수 있습니다.\n\n ◆게임규칙◆\n같은 숫자의 타일이 만나게 되면 숫자가 2배로 커지게 되고,\n타일을 이동할 때 마다 새로운 타일이 생성됩니다.\n 최종적으로 2048의 숫자를 만드는 것이 목표입니다.\n\n◆패배조건◆\n타일이 움직일 수 없게 되면 패배합니다.", font=('Helvetica', 13, "bold"), background = "#eee4da")
     label.pack(side="top")
-
-
 
 # tk 객체 생성 및 frame 설정
 root = Tk()
@@ -168,6 +171,8 @@ button6.place(x=245, y=280)
 button5 = Button(root,text="종료", font=('Helvetica', 18, "bold"), overrelief="solid", command=close, background = "#eee4da")
 button5.place(x=255, y=340)
 
+#배경 사운드 재생
+s.startsound()
 
 # 메인 화면 표시
 root.mainloop()

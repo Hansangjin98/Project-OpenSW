@@ -7,6 +7,7 @@
 # code easily while grading your problem set.
 import random
 import constants as c
+import sound as s
 
 #######
 #Task 1a#
@@ -19,6 +20,7 @@ import constants as c
 
 
 def new_game(n):
+    s.sound_unpause()
     matrix = []
 
     for i in range(n):
@@ -36,6 +38,7 @@ def new_game(n):
 
 
 def add_two(mat):
+    s.effectsound()
     a = random.randint(0, len(mat)-1)
     b = random.randint(0, len(mat)-1)
     while(mat[a][b] != 0):
