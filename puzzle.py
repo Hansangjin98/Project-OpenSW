@@ -94,12 +94,14 @@ class GameGrid(Frame):
                     self.grid_cells[1][2].configure(
                         text="Win!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                     s.endsound()
+                    self.game_end()
                 if logic.game_state(self.matrix) == 'lose':
                     self.grid_cells[1][1].configure(
                         text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[1][2].configure(
                         text="Lose!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                     s.endsound()
+                    self.game_end()
 
     def generate_next(self):
         index = (self.gen(), self.gen())
@@ -107,6 +109,15 @@ class GameGrid(Frame):
             index = (self.gen(), self.gen())
         self.matrix[index[0]][index[1]] = 2
 
+    def game_end(self):
+        label = Label(self, text="\n게임이 종료되었습니다.\n\n최종 점수 : " + str(logic.score) + "점" + "\n다시 하시겠습니까?", font=('Helvetica', 12, "bold"))
+        label.grid(row=1)
+        button = Button(self, text="Restart", command=self.regame, font=('Helvetica', 12, "bold"), background = "#eee4da")
+        button.grid(row=2)
+
+    def regame(self):
+        self.destroy()
+        self.__init__()
 
 ### 메인 함수 ####
 

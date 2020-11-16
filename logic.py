@@ -9,6 +9,7 @@ import random
 import constants as c
 import sound as s
 
+score = 0
 #######
 #Task 1a#
 #######
@@ -20,6 +21,8 @@ import sound as s
 
 
 def new_game(n):
+    global score
+    score = 0
     matrix = []
     s.startsound()
     for i in range(n):
@@ -154,12 +157,14 @@ def cover_up(mat):
 
 
 def merge(mat):
+    global score
     done = False
     for i in range(c.GRID_LEN):
         for j in range(c.GRID_LEN-1):
             if mat[i][j] == mat[i][j+1] and mat[i][j] != 0:
                 mat[i][j] *= 2
                 mat[i][j+1] = 0
+                score += mat[i][j]
                 s.effectsound()
                 done = True
     return (mat, done)
@@ -212,3 +217,4 @@ def right(game):
     game = cover_up(game)[0]
     game = reverse(game)
     return (game, done)
+    
