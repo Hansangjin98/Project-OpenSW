@@ -44,7 +44,8 @@ def add_two(mat):
     while(mat[a][b] != 0):
         a = random.randint(0, len(mat)-1)
         b = random.randint(0, len(mat)-1)
-    mat[a][b] = 2
+    li = [2, 4]
+    mat[a][b] = random.choice(li)
     return mat
 
 ###########
