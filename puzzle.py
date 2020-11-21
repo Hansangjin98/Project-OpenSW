@@ -60,6 +60,7 @@ class GameGrid(Frame):
         self.history_matrixs = list()
         self.matrix = logic.add_two(self.matrix)
         self.matrix = logic.add_two(self.matrix)
+        self.history_matrixs.append(self.matrix)
 
     def update_grid_cells(self):
         for i in range(c.GRID_LEN):
@@ -76,15 +77,22 @@ class GameGrid(Frame):
 
     def key_down(self, event):
         key = repr(event.char)
-        if key == c.KEY_BACK and len(self.history_matrixs) > 1:
+        if key == c.KEY_BACK and len(self.history_matrixs) >= 1:
+            if c.COUNT == 0:
+                self.history_matrixs.pop()
+                c.COUNT = 1
             self.matrix = self.history_matrixs.pop()
             self.update_grid_cells()
             print('back on step total step:', len(self.history_matrixs))
+            if len(self.history_matrixs)==0:
+                print('No more turning back!')
+                self.history_matrixs.append(self.matrix)
         elif key in self.commands:
             self.matrix, done = self.commands[repr(event.char)](self.matrix)
             if done:
                 self.matrix = logic.add_two(self.matrix)
                 # record last move
+                c.COUNT = 0
                 self.history_matrixs.append(self.matrix)
                 self.update_grid_cells()
                 done = False
