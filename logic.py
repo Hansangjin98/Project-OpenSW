@@ -60,13 +60,32 @@ def add_two(mat):
 # 1 mark for getting only one condition correct
 # 2 marks for getting two of the three conditions
 # 3 marks for correct checking
+def searchMatrix(mat,target):
+    
+    result = sum(mat,[])
+    result.sort()
+    
+    start = 0
+    end = len(result) - 1
 
+
+    while start <= end:
+        mid = (start + end) // 2
+
+        if result[mid] == target:
+            return mid # 
+        elif result[mid] < target:
+            start = mid + 1
+        else:
+            end = mid -1
+
+    return None
 
 def game_state(mat):
     for i in range(len(mat)):
-        for j in range(len(mat[0])):
-            if mat[i][j] == 2048:
-                return 'win'
+        idx = searchMatrix(mat, 2048)
+        if idx:
+            return 'win'
     for i in range(len(mat)-1):
         # intentionally reduced to check the row on the right and below
         # more elegant to use exceptions but most likely this will be their solution
